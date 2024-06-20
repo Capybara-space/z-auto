@@ -1,0 +1,11 @@
+
+version: '3'
+services:
+    z-auto:
+        image: registry.cn-hangzhou.aliyuncs.com/space-zyl/z-auto:v0.1.1
+        ports:
+          - "8080:80"
+        environment:
+          - TZ=Asia/Shanghai
+        restart: always
+
