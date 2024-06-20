@@ -20,3 +20,8 @@ RUN pip install  -r  z-auto/requirements.txt  -i http://mirrors.aliyun.com/pypi/
 # 设置启动命令
 # CMD ["python", "your_script.py"]
 
+# 设置启动命令，并200s后关闭
+# CMD ["sh", "-c", "sleep 200 && exit"]
+
+#保持容器运行状态
+CMD ["tail", "-f", "/dev/null"]
