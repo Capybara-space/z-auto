@@ -1,11 +1,19 @@
-
-version: '3'
+version: '3.8'
 services:
-    z-auto:
-        image: registry.cn-hangzhou.aliyuncs.com/space-zyl/z-auto:v0.1.1
-        ports:
-          - "8080:80"
-        environment:
-          - TZ=Asia/Shanghai
-        restart: always
-
+  mysql:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: test_db
+      MYSQL_USER: test_user
+      MYSQL_PASSWORD: test_password
+    ports:
+      - "3306:3306"
+  python:
+    build: .
+    command: pytest --alluredir=/app/allure_results
+    volumes:
+      - ./test_cases:/app/test_cases
+      - ./allure_results:/app/allure_results
+    depends_on:
+      - mysql
